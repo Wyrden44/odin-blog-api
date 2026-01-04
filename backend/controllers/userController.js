@@ -22,3 +22,23 @@ export const getBlog = async (req, res) => {
     res.json(blog);
 }
 
+
+export const postComment = async (req, res) => {
+    const {id} = req.params;
+    const {content} = req.body;
+
+    try {
+        const post = await prisma.comment.create({
+            data: {
+                content: content,
+                userId: req.user.id,
+                blogId: id
+            }
+        });
+
+        res.json(post.id);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Unexpected error when posting comment");
+    }
+}

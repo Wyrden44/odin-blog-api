@@ -75,5 +75,23 @@ export const updateBlog = async (req, res) => {
         res.status(500).send("Failed to update post");
     }
 
-    res.redirect("/blogs");   
+    res.json({message: "Successfully updated Blog"});
+}
+
+export const deleteComment = async (req, res) => {
+    const {id, commentId} = req.params;
+
+    try {
+        await prisma.comment.deleteMany({
+            where: {
+                id: commentId,
+                blogId: id
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to delete comment");
+    }
+
+    res.json({ message: "Comment deleted successfully" });
 }
