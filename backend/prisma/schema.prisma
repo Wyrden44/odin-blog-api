@@ -7,7 +7,22 @@ datasource db {
 }
 
 model User {
-  id             Int     @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   username       String  @unique
   hashedPassword String
+
+  blogs           Blog[]
+}
+
+model Blog {
+  id        Int         @id @default(autoincrement())
+  title     String
+  content   String      @db.Text
+
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id])
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
 }
