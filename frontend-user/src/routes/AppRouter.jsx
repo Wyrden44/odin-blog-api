@@ -4,6 +4,7 @@ import App from "../App.jsx"
 import Blog from "../pages/Blog.jsx"
 import Login from "../pages/Login.jsx"
 import Signup from "../pages/Signup.jsx"
+import Logout from "../components/Logout.jsx"
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: "blogs/:id", Component: Blog },
       { path: "login", Component: Login },
       { path: "signup", Component: Signup },
+      { path: "logout", Component: Logout}
     ]
   }
 ])
