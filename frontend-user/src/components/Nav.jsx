@@ -7,7 +7,7 @@ export default function Nav() {
 
   return (
     <nav>
-      <div className="logo">Blogs</div>
+      <div className="logo">MyBlog</div>
 
       <ul className="links">
         <li>

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchBlogs } from "../api/blogs";
 import { useAuth } from "../context/AuthContext";
+import "./Blogs.css";
+import { getTimeAgo } from "../utils/date";
+import { useNavigate } from "react-router-dom";
 
 export default function Blogs() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -8,6 +11,11 @@ export default function Blogs() {
     const [loading, setLoading] = useState(true);
 
     const {token} = useAuth();
+    const navigate = useNavigate();
+
+    const goToBlog = (id) => {
+        navigate(`/blogs/${id}`)
+    }
 
     useEffect(() => {
         // Fetch blogs from API when component mounts
@@ -26,11 +34,9 @@ export default function Blogs() {
         console.log("Searching for:", searchTerm);
     }
 
-    console.log(blogs);
-
     return (
         <section className="blogs">
-            <form className="search" onSubmit={onSearchSubmit}>
+            <form className="search-blogs" onSubmit={onSearchSubmit}>
                 <input type="text" placeholder="Search blogs..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 <button type="submit"><img src="/icons/search.png" alt="search" /></button>
             </form>
@@ -38,10 +44,10 @@ export default function Blogs() {
                 {loading && <p>Loading blogs...</p>}
                 {!loading && blogs.length === 0 && <p>No blogs found.</p>}
                 {!loading && blogs.map((blog) => (
-                    <div key={blog.id} className="blog-item">
+                    <div key={blog.id} className="blog-item" onClick={() => goToBlog(blog.id)}>
                         <div className="blog-item-header">
-                            <p>{blog.user.username}</p>
-                            <p>{blog.createdAt}</p>
+                            <p className="blog-item-user">{blog.user.username}</p>
+                            <p className="blog-item-date">{getTimeAgo(blog.createdAt)}</p>
                         </div>
                         <div className="blog-item-content">
                             <h2>{blog.title}</h2>
