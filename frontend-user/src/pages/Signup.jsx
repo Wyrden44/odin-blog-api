@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { loginUser } from "../api/auth";
+import { signupUser } from "../api/auth";
 
 export default function Signup() {
     const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export default function Signup() {
     const onSubmit = async (e) => {
         e.preventDefault();
         
-        const res = await loginUser(username, password);
+        const res = await signupUser(username, password);
 
         if (!res.ok) {
             setErrors(errors);

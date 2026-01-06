@@ -1,6 +1,6 @@
 import { API_URL } from "../config/api";
 
-export async function loginUser(username, password) {
+export async function signupUser(username, password) {
     const res = await fetch(
         API_URL + "signup",
         {
@@ -17,4 +17,23 @@ export async function loginUser(username, password) {
     }
 
     return {ok: res.ok, id: data.id}
+}
+
+export async function loginUser(username, password) {
+    const res = await fetch(
+        API_URL + "login",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        return { ok: res.ok, errors: data.errors }
+    }
+
+    return {ok: res.ok, token: data.token}
 }
