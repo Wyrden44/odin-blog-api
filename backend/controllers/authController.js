@@ -5,7 +5,6 @@ import { signToken } from "../lib/jwt.js";
 export const signup = async (req, res) => {
     const {username, password} = req.body;
     
-    
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({
