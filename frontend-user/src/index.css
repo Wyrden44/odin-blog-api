@@ -70,6 +70,6 @@ input {
   outline: none;
   transition: border-color 0.25s ease-in;
 }
-input:hover {
+input:focus {
   border-color: var(--text);
 }
