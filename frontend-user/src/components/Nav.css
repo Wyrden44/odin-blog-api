@@ -22,14 +22,14 @@ nav .links li {
     padding: 10px;
 }
 
-nav .links li a {
+.nav-link {
     position: relative;
     font-weight: 500;
     color: var(--text);
     text-decoration: none;
 }
 
-nav .links li a::after {
+.nav-link::after {
     content: "";
     width: 0;
     height: 1px;
@@ -43,6 +43,7 @@ nav .links li a::after {
     transition: width 0.3s ease;
 }
 
-nav .links li:hover a::after {
+nav .links li:hover .nav-link::after,
+nav .links li .nav-link.active::after {
     width: 100%;
 }
