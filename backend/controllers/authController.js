@@ -28,13 +28,13 @@ export const login = async (req, res) => {
     });
 
     if (!user) {
-        return res.status(401).json({error: "User not Found"});
+        return res.status(401).json({errors: ["User not Found"]});
     }
 
     const valid = await bcrypt.compare(password, user.hashedPassword);
 
     if (!valid) {
-        return res.status(401).json({error: "Invalid Password"});
+        return res.status(401).json({errors: ["Invalid Password"]});
     }
 
     // token
