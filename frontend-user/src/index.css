@@ -3,16 +3,20 @@
   padding: 0;
 }
 
-:root {
+html {
   --text: #213547;
   --background: #ffffff;
+  --button-background: #1a1a1a;
+  --grey: rgb(233, 233, 237);
+}
 
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color: var(--text);
-  background-color: var(--backgrond);
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,6 +31,10 @@ body {
   min-height: 100vh;
 }
 
+main {
+  max-width: 1500px;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -39,14 +47,29 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  color: var(--background);
+  background-color: var(--button-background);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s, color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #2c3fee;
+  background-color: var(--grey);
+  color: var(--text);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  padding: .75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease-in;
+}
+input:hover {
+  border-color: var(--text);
 }
