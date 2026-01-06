@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
 import "./Login.css";
@@ -50,6 +50,7 @@ export default function Login() {
                 </div>
                 <button type="submit">Submit</button>
             </form>
+            <p className="create-account">Don't have an account? <Link to="/signup">Create Account</Link></p>
         </div>
     );
 }
