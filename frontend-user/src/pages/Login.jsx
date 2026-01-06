@@ -19,7 +19,6 @@ export default function Login() {
         const res = await loginUser(username, password);
 
         if (!res.ok) {
-            console.log(res.errors);
             setErrors(res.errors);
             return;
         }
