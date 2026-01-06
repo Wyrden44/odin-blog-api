@@ -1,7 +1,22 @@
 import prisma from "../lib/prisma.ts";
 
 export const getAllBlogs = async (req, res) => {
-    const blogs = await prisma.blog.findMany();
+    const blogs = await prisma.blog.findMany({
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    username: true
+                }
+            },
+            comments: {
+                select: {
+                    id: true
+                }
+            }
+        },
+        orderBy: {createdAt: "desc"}
+    });
 
     return res.json(blogs);
 }
