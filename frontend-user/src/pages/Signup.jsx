@@ -30,19 +30,16 @@ export default function Signup() {
             <form className="signup-form" onSubmit={onSubmit}>
                 <div className="input-section">
                     <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" onChange={(e) => setUsername(e.target.value)} value={username} />
+                    <input type="text" name="username" id="username" onChange={(e) => setUsername(e.target.value)} value={username} required />
+                    { errors.filter(error => error.field === "username").map(error => <p className="login-error">{error.msg}</p>)}
                 </div>
                 <div className="input-section">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                    <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                    { errors.filter(error => error.field === "password").map(error => <p className="login-error">{error.msg}</p>)}
                 </div>
                 <button type="submit">Submit</button>
             </form>
-            <ul className="errors">
-                {errors.forEach(error => {
-                    <li>{error}</li>
-                })}
-            </ul>
         </div>
     );
 }

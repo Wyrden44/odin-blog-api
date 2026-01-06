@@ -29,3 +29,7 @@
 .signup-form button {
     font-weight: bold;
 }
+
+.signup-error {
+    color: red;
+}

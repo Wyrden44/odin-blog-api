@@ -29,3 +29,7 @@
 .login-form button {
     font-weight: bold;
 }
+
+.login-error {
+    color: red;
+}

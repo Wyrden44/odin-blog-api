@@ -41,11 +41,13 @@ export default function Login() {
             <form className="login-form" onSubmit={onSubmit}>
                 <div className="input-section">
                     <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" name="username" id="username" onChange={(e) => setUsername(e.target.value)} required />
+                    { errors.filter(error => error.field === "username").map(error => <p className="login-error">{error.msg}</p>)}
                 </div>
                 <div className="input-section">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} required />
+                    { errors.filter(error => error.field === "password").map(error => <p className="login-error">{error.msg}</p>)}
                 </div>
                 <button type="submit">Submit</button>
             </form>
