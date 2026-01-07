@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import "./Blogs.css";
 import { getTimeAgo } from "../utils/date";
 import { useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 export default function Blogs() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -54,7 +55,7 @@ export default function Blogs() {
                         </div>
                         <div className="blog-item-content">
                             <h2>{blog.title}</h2>
-                            <p>{blog.content}</p>
+                            <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(blog.content)}}/>
                         </div>
                         <div className="blog-item-actions">
                             <div className="blog-item-comments">

@@ -44,8 +44,16 @@
     border-bottom: 1px solid var(--grey);
 }
 
+.blog-content h2 {
+    margin: 20px 0 10px;
+}
+
+.blog-content ul {
+    padding-left: 1.5rem;
+}
+
 .blog-comments {
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .blog-comments h2 {
@@ -75,11 +83,12 @@
 }
 
 .blog-comment-list {
-    margin-top: 30px;
+    margin-top: 40px;
     width: 100%;
 }
 
 .blog-comment-item {
+    margin-top: 20px;
     width: 100%;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--grey);
