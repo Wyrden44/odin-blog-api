@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -65,7 +66,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-input {
+input, textarea {
   padding: .75rem 1rem;
   font-size: 1rem;
   border: 1px solid #e5e5e5;
@@ -73,6 +74,6 @@ input {
   outline: none;
   transition: border-color 0.25s ease-in;
 }
-input:focus {
+input:focus, textarea:focus {
   border-color: var(--text);
 }

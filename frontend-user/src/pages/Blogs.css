@@ -14,26 +14,26 @@
     border-bottom: 1px solid var(--grey);
 }
 
-.search-blogs input {
+.search-blogs-input-wrapper {
     max-width: 400px;
     flex: 1;
+    position: relative;
+}
+
+.search-blogs-input-wrapper input {
+    width: 100%;
     border-radius: 20px;
-    padding: 12px 15px;
+    padding: 12px 15px 12px 40px;
 }
 
-.search-blogs button {
-    border-radius: 50%;
-    height: 45px;
-    width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--grey);
-}
-
-.search-blogs button img {
+.search-blogs-input-wrapper img {
     width: 20px;
     height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+    pointer-events: none;
 }
 
 .blog-list {

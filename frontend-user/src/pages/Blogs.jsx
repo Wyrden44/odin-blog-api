@@ -10,40 +10,43 @@ export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const {token} = useAuth();
+    const {user} = useAuth();
     const navigate = useNavigate();
 
     const goToBlog = (id) => {
         navigate(`/blogs/${id}`)
     }
 
+    console.log(user);
+
     useEffect(() => {
         // Fetch blogs from API when component mounts
         async function fetchData() {
-            const data = await fetchBlogs(token);
+            const data = await fetchBlogs(user?.token);
             if (!data) return;
             setBlogs(data);
             setLoading(false);
         }
         fetchData();
-    }, [token]);
-
-    const onSearchSubmit = (e) => {
-        e.preventDefault();
-        // Implement search functionality here
-        console.log("Searching for:", searchTerm);
-    }
+    }, [user?.token]);
 
     return (
         <section className="blogs">
-            <form className="search-blogs" onSubmit={onSearchSubmit}>
-                <input type="text" placeholder="Search blogs..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-                <button type="submit"><img src="/icons/search.png" alt="search" /></button>
-            </form>
+            <div className="search-blogs">
+                <div className="search-blogs-input-wrapper">
+                    <input type="text" placeholder="Search blogs..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                    <img src="/icons/search.png" alt="search" />
+                </div>
+            </div>
             <div className="blog-list">
                 {loading && <p>Loading blogs...</p>}
                 {!loading && blogs.length === 0 && <p>No blogs found.</p>}
-                {!loading && blogs.map((blog) => (
+                {!loading && blogs.filter(blog => {
+                        if (searchTerm) {
+                            return blog.title.includes(searchTerm);
+                        }
+                        return true;
+                    }).map((blog) => (
                     <div key={blog.id} className="blog-item" onClick={() => goToBlog(blog.id)}>
                         <div className="blog-item-header">
                             <p className="blog-item-user">{blog.user.username}</p>
