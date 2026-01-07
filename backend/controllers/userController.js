@@ -24,9 +24,33 @@ export const getAllBlogs = async (req, res) => {
 export const getBlog = async (req, res) => {
     const {id} = req.params;
 
+    const blogId = Number(id);
+
+    if (isNaN(blogId)) {
+        return res.status(400).json({ message: "Invalid blog id" });
+    }
+
     const blog = await prisma.blog.findUnique({
         where: {
-            id: id
+            id: blogId
+        },
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    username: true
+                }
+            },
+            comments: {
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            username: true,
+                        }
+                    }
+                }
+            }
         }
     });
 
