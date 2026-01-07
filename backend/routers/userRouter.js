@@ -6,6 +6,6 @@ const userRouter = new Router();
 
 userRouter.get("/blogs", getAllBlogs);
 userRouter.get("/blogs/:id", getBlog);
-userRouter.post("blogs/:id/comments", authenticate, postComment);
+userRouter.post("/blogs/:id/comments", authenticate, postComment);
 
 export default userRouter;

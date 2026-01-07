@@ -49,7 +49,8 @@ export const getBlog = async (req, res) => {
                             username: true,
                         }
                     }
-                }
+                },
+                orderBy: {createdAt: "desc"}
             }
         }
     });
@@ -66,18 +67,24 @@ export const postComment = async (req, res) => {
     const {id} = req.params;
     const {content} = req.body;
 
+    const blogId = Number(id);
+
+    if (isNaN(blogId)) {
+        return res.status(400).json({ errors: ["Invalid blog id"] });
+    }
+
     try {
         const post = await prisma.comment.create({
             data: {
                 content: content,
                 userId: req.user.id,
-                blogId: id
+                blogId: blogId
             }
         });
 
         res.json(post.id);
     } catch (err) {
         console.error(err);
-        return res.status(500).send("Unexpected error when posting comment");
+        return res.status(500).json({errors: ["Unexpected error when posting comment"]});
     }
 }
