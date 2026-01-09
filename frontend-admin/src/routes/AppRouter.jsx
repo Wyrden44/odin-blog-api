@@ -9,11 +9,12 @@ const router = createBrowserRouter([{
     path: "/",
     element: <App />,
     children: [
-        {index: true, loader: async () => redirect("/blogs")},
-        {path: "blogs", Component: Blogs},
-        {path:  "blogs/:id", Component: Blog},
-        {path: "login", Component: Login},
-        {path: "logout", Component: Logout}
+        {index: true, loader: async () => redirect("/admin")},
+        {path: "admin", loader: async () => redirect("/admin/blogs")},
+        {path: "admin/blogs", Component: Blogs},
+        {path: "admin/blogs/:id", Component: Blog},
+        {path: "admin/login", Component: Login},
+        {path: "admin/logout", Component: Logout}
     ]
 }]);
 
