@@ -5,7 +5,7 @@ import Blog from "../pages/Blog";
 import Login from "../pages/Login";
 import Logout from "../pages/Logout";
 
-const router = createBrowserRouter({
+const router = createBrowserRouter([{
     path: "/",
     element: <App />,
     children: [
@@ -15,7 +15,7 @@ const router = createBrowserRouter({
         {path: "login", Component: Login},
         {path: "logout", Component: Logout}
     ]
-});
+}]);
 
 export default function AppRouter() {
     return (
