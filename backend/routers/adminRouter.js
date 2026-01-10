@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getAllBlogs, getBlog, postBlog, deleteBlog, updateBlog, deleteComment } from "../controllers/adminController.js";
+import { adminLogin } from "../controllers/authController.js";
 
 const adminRouter = new Router();
 

@@ -41,3 +41,23 @@ export const login = async (req, res) => {
 
     res.json({ token });
 }
+
+export const adminLogin = async (req, res) => {
+    const {password} = req.body;
+
+    const admin = await prisma.user.findUnique({
+        where: {
+            username: "admin",
+        }
+    });
+
+    const valid = await bcrypt.compare(password, admin.hashedPassword);
+
+    if (!valid) {
+        return res.status(401).json({errors: ["Invalid Password"]});
+    }
+
+    const token = signToken({id: admin.id, username: admin.username});
+
+    res.json({token});
+}

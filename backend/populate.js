@@ -1,7 +1,19 @@
 import prisma from "./lib/prisma.ts";
+import { Role } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 async function main() {
   console.log("🌱 Seeding database...");
+
+  // add admin
+  const adminPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+  await prisma.user.create({
+    data: {
+        username: "admin",
+        hashedPassword: adminPassword,
+        role: Role.ADMIN
+    }
+  });
 
   // 1️⃣ Create test user
   const user = await prisma.user.create({
