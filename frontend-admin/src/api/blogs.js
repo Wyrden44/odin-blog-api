@@ -1,4 +1,4 @@
-import { API_URL } from "../../../frontend-user/src/config/api";
+import { API_URL } from "../config/config";
 
 export async function getAllBlogs(token) {
     const res = await fetch(
@@ -13,6 +13,8 @@ export async function getAllBlogs(token) {
     }
 
     const data = await res.json();
+
+    console.log(data);
 
     return data;
 }

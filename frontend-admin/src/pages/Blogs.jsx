@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { getAllBlogs } from "../api/blogs";
 import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
+import "./Blogs.css";
 
 export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
@@ -14,6 +15,14 @@ export default function Blogs() {
 
     const goToBlog = (id) => {
         navigate(`/blogs/${id}`)
+    }
+
+    const onEditButtonSubmit = (id) => {
+        navigate(`/blogs/${id}`);
+    }
+
+    const onDeleteButtonSubmit = (id) => {
+        
     }
 
     const fetchBlogs = async () => {
@@ -59,6 +68,10 @@ export default function Blogs() {
                             <div className="blog-item-comments">
                                 <img src="/icons/comment.png" alt="comment" />
                                 <p>{blog.comments.length}</p>
+                            </div>
+                            <div className="blog-item-admin-actions">
+                                <button onSubmit={() => onEditButtonSubmit(blog.id)}>Edit</button>
+                                <button className="blog-item-admin-actions-delete" onSubmit={() => onDeleteButtonSubmit(blog.id)}>Delete</button>
                             </div>
                         </div>
                     </div>
