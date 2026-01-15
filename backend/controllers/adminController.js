@@ -83,10 +83,16 @@ export const postBlog = async (req, res) => {
 export const deleteBlog = async (req, res) => {
     const {id} = req.params;
 
+    const blogId = Number(id);
+
+    if (isNaN(blogId)) {
+        return res.status(400).json({ message: "Invalid blog id" });
+    }
+
     try {
         await prisma.blog.delete({
             where: {
-                id: id
+                id: blogId
             }
         });
     } catch (err) {
@@ -99,10 +105,16 @@ export const updateBlog = async (req, res) => {
     const {id} = req.params;
     const {title, content} = req.body;
 
+    const blogId = Number(id);
+
+    if (isNaN(blogId)) {
+        return res.status(400).json({ message: "Invalid blog id" });
+    }
+
     try {
         await prisma.blog.update({
             where: {
-                id: id
+                id: blogId
             },
             data: {
                 title,
@@ -120,11 +132,19 @@ export const updateBlog = async (req, res) => {
 export const deleteComment = async (req, res) => {
     const {id, commentId} = req.params;
 
+    const blogId = Number(id);
+
+    const commentIdNum = Number(commentId);
+
+    if (isNaN(blogId) || isNaN(commentIdNum)) {
+        return res.status(400).json({ message: "Invalid" });
+    }
+
     try {
         await prisma.comment.deleteMany({
             where: {
-                id: commentId,
-                blogId: id
+                id: commentIdNum,
+                blogId: blogId
             }
         });
     } catch (err) {
