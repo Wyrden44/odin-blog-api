@@ -14,13 +14,13 @@ export const authenticate = (req, res, next) => {
         req.user = payload
         next()
     } catch {
-        res.status(401).json({ message: 'Invalid token' })
+        res.status(401).json({ errors: 'Invalid token' })
     }
 }
 
 export const checkAdmin = (req, res, next) => {
     if (!req.user?.role === "ADMIN") {
-        return res.status(403).send("Forbidden");
+        return res.status(403).json({errors: "Forbidden"});
     }
     next()
 }

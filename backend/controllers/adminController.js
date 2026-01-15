@@ -74,7 +74,7 @@ export const postBlog = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Failed to create post");
+        res.status(500).json({errors: "Failed to post Blog"});
     }
 
     res.redirect("/blogs");
@@ -91,7 +91,7 @@ export const deleteBlog = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Failed to delete post");
+        res.status(500).json({errors: "Failed to delete Blog"});
     }
 }
 
@@ -111,7 +111,7 @@ export const updateBlog = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Failed to update post");
+        res.status(500).json({errors: "Failed to update post"});
     }
 
     res.json({message: "Successfully updated Blog"});
@@ -129,7 +129,7 @@ export const deleteComment = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Failed to delete comment");
+        res.status(500).json({errors: "Failed to delete comment"});
     }
 
     res.json({ message: "Comment deleted successfully" });
