@@ -37,7 +37,7 @@ export const login = async (req, res) => {
     }
 
     // token
-    const token = signToken({ id: user.id, username: user.username});
+    const token = signToken({ id: user.id, username: user.username, role: user.role });
 
     res.json({ token });
 }
@@ -57,7 +57,7 @@ export const adminLogin = async (req, res) => {
         return res.status(401).json({errors: ["Invalid Password"]});
     }
 
-    const token = signToken({id: admin.id, username: admin.username});
+    const token = signToken({id: admin.id, username: admin.username, role: admin.role });
 
     res.json({token});
 }
