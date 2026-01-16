@@ -4,7 +4,7 @@ export async function getAllBlogs(token) {
     const res = await fetch(
         API_URL + "blogs",
         {
-            headers: { Authorization: "Bearer " + token }
+            headers: { Authorization: "Bearer " + token },
         }
     );
 
@@ -17,4 +17,22 @@ export async function getAllBlogs(token) {
     console.log(data);
 
     return data;
+}
+
+export async function deleteBlog(id, token) {
+    const res = await fetch(
+        API_URL + "blogs/" + id,
+        {
+            headers: { Authorization: "Bearer " + token },
+            method: "DELETE"
+        }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        return {ok: res.ok, errors: data.errors};
+    }
+
+    return {ok: res.ok};
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getAllBlogs } from "../api/blogs";
+import { deleteBlog, getAllBlogs } from "../api/blogs";
 import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import "./Blogs.css";
@@ -21,8 +21,19 @@ export default function Blogs() {
         navigate(`/blogs/${id}`);
     }
 
-    const onDeleteButtonSubmit = (id) => {
+    const onDeleteButtonSubmit = async (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const res = await deleteBlog(id, user.token);
+        if (!res.ok) {
+            alert(res.errors);
+            return;
+        }
         
+        // update blogs
+        setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== id));
+
     }
 
     const fetchBlogs = async () => {
@@ -70,8 +81,8 @@ export default function Blogs() {
                                 <p>{blog.comments.length}</p>
                             </div>
                             <div className="blog-item-admin-actions">
-                                <button onSubmit={() => onEditButtonSubmit(blog.id)}>Edit</button>
-                                <button className="blog-item-admin-actions-delete" onSubmit={() => onDeleteButtonSubmit(blog.id)}>Delete</button>
+                                <button type="button" onClick={() => onEditButtonSubmit(blog.id)}>Edit</button>
+                                <button type="button" className="blog-item-admin-actions-delete" onClick={(e) => onDeleteButtonSubmit(e, blog.id)}>Delete</button>
                             </div>
                         </div>
                     </div>
