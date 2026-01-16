@@ -99,6 +99,8 @@ export const deleteBlog = async (req, res) => {
         console.error(err);
         res.status(500).json({errors: "Failed to delete Blog"});
     }
+
+    res.json({msg: "Successfully deleted Blog"});
 }
 
 export const updateBlog = async (req, res) => {
